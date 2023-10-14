@@ -1,0 +1,87 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&family=Fjalla+One&family=Poppins:ital,wght@0,200;0,300;1,200&family=Tilt+Prism&display=swap');
+
+
+nav div a {
+
+    font-family: 'Fjalla One', sans-serif;
+    font-size: 18px;
+
+}
+/* .contenedor{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: 150px  auto auto;
+    grid-template-areas: 
+    "header header header"
+    "main main aside"
+    "main main aside"
+    
+    ;
+} */
+/* header{
+    grid-area: header;
+} */
+.mesas{
+    background-image:url("img/imagen1.jpg");
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-position: center;
+    height: auto;
+   /*  grid-area: main; */
+    
+
+}
+
+.mesa{
+    margin: 15px;
+    padding: 5px;
+    align-items: center;
+    text-align: center;
+    width: auto;
+    height: auto;
+    display: inline-block;
+    border: 3px rgb(29, 77, 150) solid;
+    background-color:white;
+    box-shadow: 4px 4px 2px 4px #292828;
+    border-radius: 10px;
+    
+}
+.mesa h4{
+    font-family: 'Fjalla One', sans-serif;
+    color: blue;
+
+}
+.form-floating{
+    padding: 2px;
+}
+button {
+    padding: 5px;
+}
+.input-group {
+    padding: 5px;
+    
+}
+/* aside{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px;
+    padding: 0px; 
+    
+    
+   
+} */
+/* .menuComidas{
+     margin: 10px;
+    padding: 10px; 
+    
+
+    
+}
+.menuBebidas{
+    margin: 10px;
+    padding: 10px;
+
+}  */
+
