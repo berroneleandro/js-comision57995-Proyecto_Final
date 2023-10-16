@@ -194,7 +194,14 @@ function vaciarPedidos(){
     
         
     }else{
-        // console.log("sin stock de "+platoElegido.nombre);
+        Swal.fire({
+            icon: 'error',
+            title: 'sin stock',
+            text: 'sin Stock del plato elegido!',
+            footer: '<a href="">Why do I have this issue?</a>'
+          })
+
+
         platoElegido.nombre="sin stok";
         platoElegido.precio=0;
 
@@ -207,13 +214,17 @@ function vaciarPedidos(){
         /* console.log("su Bebida es "+BebidaElegida.nombre);
         console.log("stok " +BebidaElegida.stock); */
     }else{
-        // console.log("sin stock de "+BebidaElegida.nombre);
+        Swal.fire({
+            icon: 'error',
+            title: 'sin stock',
+            text: 'sin Stock de la bebida elegida!',
+            footer: '<a href="">Why do I have this issue?</a>'
+          })
         BebidaElegida.nombre="sin stok";
         BebidaElegida.precio=0;
     }
 
-    // console.log("--------------");
-     /* leerPedidos2(platoElegido,BebidaElegida);  */
+    
      const infoPedido={
         plato:platoElegido.nombre,
         precioPlato:platoElegido.precio,
@@ -380,7 +391,14 @@ function buscarPedido2(){
     
         
     }else{
-        // console.log("sin stock de "+platoElegido.nombre);
+        Swal.fire({
+            icon: 'error',
+            title: 'sin stock',
+            text: 'sin Stock del plato elegido!',
+            footer: '<a href="">Why do I have this issue?</a>'
+          })
+          platoElegido.nombre="sin stok";
+        platoElegido.precio=0;
 
     }
     
@@ -392,7 +410,14 @@ function buscarPedido2(){
         /* console.log("su Bebida es "+BebidaElegida.nombre);
         console.log("stok " +BebidaElegida.stock); */
     }else{
-        // console.log("sin stock de "+BebidaElegida.nombre);
+        Swal.fire({
+            icon: 'error',
+            title: 'sin stock',
+            text: 'sin Stock de la bebida elegida!',
+            footer: '<a href="">Why do I have this issue?</a>'
+          })
+          BebidaElegida.nombre="sin stok";
+        BebidaElegida.precio=0;
     }
 
     // console.log("--------------");
@@ -520,7 +545,14 @@ function buscarPedido3(){
     
         
     }else{
-        // console.log("sin stock de "+platoElegido.nombre);
+        Swal.fire({
+            icon: 'error',
+            title: 'sin stock',
+            text: 'sin Stock del plato elegido!',
+            footer: '<a href="">Why do I have this issue?</a>'
+          })
+          platoElegido.nombre="sin stok";
+        platoElegido.precio=0;
 
     }
     
@@ -532,7 +564,15 @@ function buscarPedido3(){
         // console.log("su Bebida es "+BebidaElegida.nombre);
         // console.log("stok " +BebidaElegida.stock);
     }else{
-        // console.log("sin stock de "+BebidaElegida.nombre);
+        Swal.fire({
+            icon: 'error',
+            title: 'sin stock',
+            text: 'sin Stock de la bebida elegida!',
+            footer: '<a href="">Why do I have this issue?</a>'
+          })
+          BebidaElegida.nombre="sin stok";
+        BebidaElegida.precio=0;
+          
     }
 
     // console.log("--------------");
@@ -657,6 +697,15 @@ function buscarPedido4(){
     
     platoElegido.stock-=1;
      
+    }else{
+        Swal.fire({
+            icon: 'error',
+            title: 'sin stock',
+            text: 'sin Stock del plato elegido!',
+            footer: '<a href="">Why do I have this issue?</a>'
+          })
+          platoElegido.nombre="sin stok";
+        platoElegido.precio=0;
     }
     
     bebida4=CargaBebidas4.value;
@@ -665,6 +714,15 @@ function buscarPedido4(){
     if(BebidaElegida.stock>=1){
         BebidaElegida.stock-=1;
        
+    }else{
+        Swal.fire({
+            icon: 'error',
+            title: 'sin stock',
+            text: 'sin Stock de la bebida elegida!',
+            footer: '<a href="">Why do I have this issue?</a>'
+          })
+          BebidaElegida.nombre="sin stok";
+        BebidaElegida.precio=0;
     }
 
    
@@ -726,10 +784,38 @@ let tabBebidas=document.querySelector('#menuBebidas');
 
 
 const links = document.querySelector('#menuCom');
-links.addEventListener('click',dibujarMenuComidas)
+// links.addEventListener('click',dibujarMenuComidas)
 
 const link = document.querySelector('#menuBeb');
-link.addEventListener('click',dibujarMenuBebidas)
+//link.addEventListener('click',dibujarMenuBebidas)
+
+links.addEventListener('click', setURL)
+link.addEventListener('click', setURL)
+function setURL(evt){
+    evt.preventDefault()
+    //console.log(evt.target.dataset.pagina);
+    url = evt.target.dataset.pagina + ".html";
+    pedirPagina(url) 
+    //console.log(url)
+} 
+
+function pedirPagina(url){
+    //console.log(url)
+    fetch(url)
+        .then((res)=>{
+            return res.text()
+        })
+        .then((pagina)=>{
+            //console.log(pagina)
+            document.querySelector('#men').innerHTML = pagina
+        })
+        .catch((err)=>{
+            console.log("SE Fue por el erro")
+            console.log(err)
+        })
+        
+}  
+
 
 function dibujarMenuBebidas(){
 
@@ -888,10 +974,10 @@ function agregarComida() {
     let stockComida = parseFloat(stock.value);
 
     
-    if (isNaN(precioComida) || isNaN(stockComida) || NombreComida === '') {
+/*     if (isNaN(precioComida) || isNaN(stockComida) || NombreComida === '') {
         console.log("Por favor, ingrese valores válidos para los campos.");
         return;
-    }
+    } */
 
     let numeroOrden = menuComidas.length + 1;
 
@@ -934,43 +1020,8 @@ let numeroOrden=menuBebidas.length+1;
 
 menuBebidas.push(infoBebida);
 
-console.log(infoBebida)
+//console.log(infoBebida)
 dibujarMenuBebidas();  
 sincronizar();
 } 
 
-
-/* 
-
-
-links.addEventListener('click', setURL)
-function setURL(evt){
-    evt.preventDefault()
-    //console.log(evt.target.dataset.pagina);
-    url = evt.target.dataset.pagina + ".html";
-    pedirPagina(url) 
-    //console.log(url)
-} 
-
-
-
-function pedirPagina(url){
-    //console.log(url)
-    fetch(url)
-        .then((res)=>{
-            return res.text()
-        })
-        .then((pagina)=>{
-           // console.log(pagina)
-            document.querySelector('#men').innerHTML = pagina
-        })
-        .catch((err)=>{
-            console.log("SE Fue por el erro")
-            console.log(err)
-        })
-        .finally(console.log("finalizo la peticion"))
-}  
-
-
-
- */
