@@ -280,31 +280,77 @@
 
         </main>
 
-        <aside>
-          <table class="table table-striped table-hover " id="menuComidas"> 
-            <tr>
-              <th>comida</th>
-              <th>precio</th>
-              <th>stock</th>
-              <th>numero de orden</th>
-              
-          </tr>
-          </table>
+        <section>
+          <div  class="menu">
+            <button class="btn btn-primary" type="button" id="menuCom" data-pagina="menu">comidas</button>
 
-          
+            <button class="btn btn-primary" type="button"id="menuBeb">Bebidas</button>
 
-          <table class="table table-striped table-hover  " id="menuBebidas">
-            <tr>
-              <th>bebidas</th>
-              <th>precio</th>
-              <th>stock</th>
-              <th>numero de orden</th>
-              
-          </tr>
-          </table>
+           
+          </div>
+          <div id="men">
+            <table class="table table-striped table-hover "> 
+              <tr>
+                <th>producto</th>
+                <th>precio</th>
+                <th>stock</th>
+                <th>numero de orden</th>
+                <th></th>
+                
+            </tr>
+            </table>
+            
+            <table class="table table-striped table-hover " id="menuComidas"> 
+              <tr>
+                <th>producto</th>
+                <th>precio</th>
+                <th>stock</th>
+                <th>numero de orden</th>
+                <th></th>
+                
+            </tr>
+            </table>
+          </div>
           
           
-        </aside>
+        </section>
+        <section class="editarMenu">
+          <div class="card">
+            <h2>Agregar Comidas</h2>
+            <form>
+                <label for="comida">Comida:</label>
+                <input type="text" id="nombreComida" name="nombreComida" required><br><br>
+    
+                <label for="precio">Precio:</label>
+                <input type="number" id="precioComida" name="precioComida" required><br><br>
+    
+                <label for="stock">Stock:</label>
+                <input type="number" id="stockComida" name="stockComida" required><br><br>
+    
+                
+    
+                <input type="submit" value="Guardar" id="guardarComida">
+            </form>
+        </div>
+        <div class="card">
+          <h2>Agregar Bebidas</h2>
+          <form>
+              <label for="comida">Bebida:</label>
+              <input type="text" id="nombreBebida" name="bebida" required><br><br>
+  
+              <label for="precio">Precio:</label>
+              <input type="number" id="precioBebida" name="precio" required><br><br>
+  
+              <label for="stock">Stock:</label>
+              <input type="number" id="stockBebida" name="stock" required><br><br>
+  
+              <!-- <label for="numOrden">Número de Orden:</label>
+              <input type="number" id="numOrden" name="numOrden" required><br><br> -->
+  
+              <input type="submit" value="Guardar" id="guardarBebida">
+          </form>
+      </div>
+        </section>
         <footer>
 
         </footer>

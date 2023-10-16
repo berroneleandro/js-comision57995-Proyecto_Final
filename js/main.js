@@ -18,6 +18,7 @@ for (let i = 0; i < bebidas.length ; i++) {
 } */
 
 menuComidas=platosDeComida
+let menuBebidas=[]
 menuBebidas=bebidas
 
 let carga=document.getElementById("comidas");
@@ -45,37 +46,52 @@ finalizar.addEventListener('click',sumaTotal(sumarPrecios,sumarPreciosBebida)); 
 borrar.addEventListener('click',borrarPedido);
 
  document.addEventListener('DOMContentLoaded',()=>{
-    if(JSON.parse(localStorage.getItem('pedidos'))==null){
+   /*  if(JSON.parse(localStorage.getItem('pedidos'))==null){
         pedidoAbiertos=[]
         
         
     }else{
         pedidoAbiertos=JSON.parse(localStorage.getItem('pedidos'))
-    }
+    } */
+
+    pedidoAbiertos = JSON.parse(localStorage.getItem('pedidos')) || [];
+
     
     
-    if(JSON.parse(localStorage.getItem('pedidos 2'))==null){
+/*     if(JSON.parse(localStorage.getItem('pedidos 2'))==null){
         pedidoAbiertos2=[]
     }else{
         pedidoAbiertos2=JSON.parse(localStorage.getItem('pedidos 2'))
 
-    } 
-    if(JSON.parse(localStorage.getItem('pedidos 3'))==null){
+    }  */
+
+    pedidoAbiertos2=JSON.parse(localStorage.getItem('pedidos 2'))||[];
+
+
+/*     if(JSON.parse(localStorage.getItem('pedidos 3'))==null){
         pedidoAbierto3=[]
     }else{
         pedidoAbierto3=JSON.parse(localStorage.getItem('pedidos 3'))
 
-    } 
-    if(JSON.parse(localStorage.getItem('pedidos 4'))==null){
+    }  */
+    pedidoAbierto3=JSON.parse(localStorage.getItem('pedidos 3'))||[];
+ 
+    /*    if(JSON.parse(localStorage.getItem('pedidos 4'))==null){
       pedidoAbierto4=[]
   }else{
       pedidoAbierto4=JSON.parse(localStorage.getItem('pedidos 4'))
 
-  } 
+  }  */
+
+  pedidoAbierto4=JSON.parse(localStorage.getItem('pedidos 4'))||[];
+
+
      dibujarPedidos(listaPedido2,pedidoAbiertos2);
     dibujarPedidos(listaPedido,pedidoAbiertos);  
     dibujarPedidos(listaPedido3,pedidoAbierto3);
     dibujarPedidos(listaPedido4,pedidoAbierto4);
+    dibujarMenuComidas();
+
 })
   
 /* function leerPedidos(comidas,bebidas){
@@ -288,6 +304,7 @@ function sincronizar(){
     localStorage.setItem('pedidos 2',JSON.stringify(pedidoAbiertos2)) 
     localStorage.setItem('pedidos 3',JSON.stringify(pedidoAbierto3)) 
     localStorage.setItem('pedidos 4',JSON.stringify(pedidoAbierto4)) 
+    localStorage.setItem('menu',JSON.stringify(menuBebidas))
 }
 
 // ----------------------------logica para mesa 2---------------------
@@ -706,24 +723,17 @@ function borrarPedido4(){
 //-------------------Menu------
 let tabComidas = document.querySelector('#menuComidas');
 let tabBebidas=document.querySelector('#menuBebidas');
-function dibujarMenu(){
 
-    
 
-    menuComidas.forEach(productos=>{
-        const fila = document.createElement('tr')
-        fila.innerHTML =`
-        
-        <td>${productos.nombre}</td>
-        <td>${productos.precio}</td>
-        <td>${productos.stock}</td>
-        <td>${productos.NumeroDeOrden}</td>
-                                  
-        
-        `;
-        tabComidas.appendChild(fila)
+const links = document.querySelector('#menuCom');
+links.addEventListener('click',dibujarMenuComidas)
 
-    })
+const link = document.querySelector('#menuBeb');
+link.addEventListener('click',dibujarMenuBebidas)
+
+function dibujarMenuBebidas(){
+
+    limpiarCarrito(tabComidas);
 
     menuBebidas.forEach(productos=>{
         const fila = document.createElement('tr')
@@ -733,13 +743,234 @@ function dibujarMenu(){
         <td>${productos.precio}</td>
         <td>${productos.stock}</td>
         <td>${productos.NumeroDeOrden}</td>
+        <td>
+        <a href="#" class="borrar-producto" data-id="${productos.NumeroDeOrden}">❌</a> </td>
+                                  
+        
+        `;
+        tabComidas.appendChild(fila)
+
+    })
+
+    
+
+}
+
+function dibujarMenuComidas(){
+    
+
+    limpiarCarrito(tabComidas);
+    // limpiarCarrito(tabBebidas) 
+    
+
+    menuComidas.forEach(productos=>{
+        const fila = document.createElement('tr')
+        fila.innerHTML =`
+        
+        <td>${productos.nombre}</td>
+        <td>${productos.precio}</td>
+        <td>${productos.stock}</td>
+        <td>${productos.NumeroDeOrden}</td> 
+        <td>
+        <a href="#" class="borrar-producto" data-id="${productos.NumeroDeOrden}">❌</a> </td>
+                                  
+        
+        `;
+        tabComidas.appendChild(fila)
+        
+
+
+    })
+    
+
+   /*  menuBebidas.forEach(productos=>{
+        const fila = document.createElement('tr')
+        fila.innerHTML =`
+        
+        <td>${productos.nombre}</td>
+        <td>${productos.precio}</td>
+        <td>${productos.stock}</td>
+        <td>${productos.NumeroDeOrden}</td>
+        <td>
+        <a href="#" class="borrar-producto" data-id="${productos.NumeroDeOrden}">❌</a> </td>
                                   
         
         `;
         tabBebidas.appendChild(fila)
 
-    })
+    }) */
     
 }
 
-dibujarMenu();
+
+/* 
+function eliminarMenu(evt){
+    evt.preventDefault();
+    // console.log(evt)
+    if(evt.target.classList.contains('borrar-producto')){
+        const producto = evt.target.parentElement.parentElement;
+        //  console.log(producto)
+         const productoId = producto.querySelector('a').getAttribute('data-id')
+         //console.log(productoId)
+        menuComidas= menuComidas.filter( producto => producto.NumeroDeOrden!== productoId);
+
+
+         dibujarMenu(); 
+    } 
+
+}
+menu.addEventListener('click', eliminarMenu);
+
+function limpiarMenu(){
+    while(tabComidas.firstChild){
+        tabComidas.removeChild(tabComidas.firstChild)
+    }
+   /*  while(tabBebidas.firstChild){
+        tabBebidas.removeChild(tabBebidas.firstChild)
+    } 
+} */
+
+
+
+let guardarComida=document.querySelector('#guardarComida');
+guardarComida.addEventListener('click',agregarComida);
+
+let guardarBebebida=document.querySelector('#guardarBebida');
+guardarBebebida.addEventListener('click',agregarBebida);
+
+
+
+/* function agregarComida(){
+
+    let comida=document.querySelector('#nombreComida');
+let NombreComida=comida.value;
+let precio=document.querySelector('#precioComida');
+let precioComida = parseFloat(document.querySelector('#precioComida').value);
+let stock=document.querySelector('#stockComida');
+let stockComida = parseFloat(document.querySelector('#stockComida').value);
+let numeroOrden=menuComidas.length+1;
+
+    if (isNaN(precioComida) || isNaN(stockComida)) {
+        console.log("El precio o el stock no es un número válido");
+    } else {
+        
+        const infoComida = {
+            nombre: NombreComida,
+            precio: precioComida,
+            stock: stockComida,
+            numeroOrden: numeroOrden
+        }
+  
+/* 
+const infoComida={
+    nombre:NombreComida,
+    precio:precioComida,
+    stock:stockComida,
+    numeroOrden:numeroOrden
+}
+ */
+/* menuComidas.push(infoComida);
+
+
+dibujarMenu() 
+
+console.log(infoComida)
+    
+}
+}
+ */
+function agregarComida() {
+    let comida = document.querySelector('#nombreComida');
+    let NombreComida = comida.value;
+    let precio = document.querySelector('#precioComida');
+    let precioComida = parseFloat(precio.value);
+    let stock = document.querySelector('#stockComida');
+    let stockComida = parseFloat(stock.value);
+
+    
+    if (isNaN(precioComida) || isNaN(stockComida) || NombreComida === '') {
+        console.log("Por favor, ingrese valores válidos para los campos.");
+        return;
+    }
+
+    let numeroOrden = menuComidas.length + 1;
+
+    const infoComida = {
+        nombre: NombreComida,
+        precio: precioComida,
+        stock: stockComida,
+        numeroOrden: numeroOrden
+    }
+   
+    menuComidas.push(infoComida)
+    fetch()
+
+    dibujarMenuComidas();
+}
+
+function agregarBebida(){
+    let bebida=document.querySelector('#nombreBebida');
+let NombreBebida=bebida.value;
+let precio=document.querySelector('#precioBebida');
+let precioBebidas=precio.value;
+let stock=document.querySelector('#stockBebida');
+let stockBebida=stock.value;
+let numeroOrden=menuBebidas.length+1;
+   
+
+   /*  console.log(NombreBebida)
+    console.log(typeof(NombreBebida))
+    console.log(precioBebidas)
+    console.log(stockBebida)
+    console.log(numeroOrden) */
+   
+
+ let infoBebida={
+    nombre:NombreBebida,
+    precio:precioBebidas,
+    stock:stockBebida,
+    numeroOrden:numeroOrden
+}
+
+menuBebidas.push(infoBebida);
+
+console.log(infoBebida)
+dibujarMenuBebidas();  
+sincronizar();
+} 
+
+
+/* 
+
+
+links.addEventListener('click', setURL)
+function setURL(evt){
+    evt.preventDefault()
+    //console.log(evt.target.dataset.pagina);
+    url = evt.target.dataset.pagina + ".html";
+    pedirPagina(url) 
+    //console.log(url)
+} 
+
+
+
+function pedirPagina(url){
+    //console.log(url)
+    fetch(url)
+        .then((res)=>{
+            return res.text()
+        })
+        .then((pagina)=>{
+           // console.log(pagina)
+            document.querySelector('#men').innerHTML = pagina
+        })
+        .catch((err)=>{
+            console.log("SE Fue por el erro")
+            console.log(err)
+        })
+        .finally(console.log("finalizo la peticion"))
+}  
+
+
+
+ */
