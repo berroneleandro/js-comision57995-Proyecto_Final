@@ -261,28 +261,23 @@ function sumarPedido(){
 function sumaTotal(pedidos,bebidas){
     let Total = pedidos.reduce ((a, b) =>a+b,0);
     let TotalBebidas=bebidas.reduce ((a, b) =>a+b,0);
-    
-   /*  for(let i=0;i<pedidos[i];i++){
-
-        console.log("------------------------------------------")
-
-    
-        console.log("orden "+[i+1]+" Plato precio "+pedidos[i]);
-        console.log("orden "+[i+1]+" Bebidas precio "+bebidas[i]);
-    } */
+   
 
     let PrecioTotal=Total+TotalBebidas;
 
     
-   /*  console.log("-----------------"),
-    console.log("total de menu: "+Total);
-    console.log("total de Bebida: "+TotalBebidas);
-    console.log("___________________________")
-    console.log("el total es : "+PrecioTotal); */
+ 
     let montototal=document.getElementById("montoTotal");
     montototal.innerText=PrecioTotal;
     sumarPrecios.splice(0, sumarPrecios.length);
     sumarPreciosBebida.splice(0,sumarPreciosBebida.length);
+    Swal.fire({
+        
+        icon: 'success',
+        title: 'Pedido Finalizado',
+        showConfirmButton: false,
+        timer: 1500
+      })
 
     vaciarPedidos();
    
@@ -315,7 +310,8 @@ function sincronizar(){
     localStorage.setItem('pedidos 2',JSON.stringify(pedidoAbiertos2)) 
     localStorage.setItem('pedidos 3',JSON.stringify(pedidoAbierto3)) 
     localStorage.setItem('pedidos 4',JSON.stringify(pedidoAbierto4)) 
-    localStorage.setItem('menu',JSON.stringify(menuBebidas))
+    localStorage.setItem('menu bebidas',JSON.stringify(menuBebidas))
+    localStorage.setItem('menu comidas',JSON.stringify(menuComidas))
 }
 
 // ----------------------------logica para mesa 2---------------------
@@ -445,27 +441,22 @@ function sumaTotal2(pedidos,bebidas){
     let Total = pedidos.reduce ((a, b) =>a+b,0);
     let TotalBebidas=bebidas.reduce ((a, b) =>a+b,0);
     
-   /*  for(let i=0;i<pedidos[i];i++){
-
-        console.log("------------------------------------------")
-
-    
-        console.log("orden "+[i+1]+" Plato precio "+pedidos[i]);
-        console.log("orden "+[i+1]+" Bebidas precio "+bebidas[i]);
-    } */
+  
 
     let PrecioTotal=Total+TotalBebidas;
 
     
-    /* console.log("-----------------"),
-    console.log("total de menu: "+Total);
-    console.log("total de Bebida: "+TotalBebidas);
-    console.log("___________________________")
-    console.log("el total es : "+PrecioTotal); */
     let montototal=document.getElementById("montoTotal2");
     montototal.innerText=PrecioTotal;
     sumarPrecios2.splice(0, sumarPrecios2.length);
     sumarPreciosBebida2.splice(0,sumarPreciosBebida2.length);
+    Swal.fire({
+       
+        icon: 'success',
+        title: 'Pedido Finalizado',
+        showConfirmButton: false,
+        timer: 1500
+      })
 
     vaciarPedidos2();
    
@@ -600,27 +591,23 @@ function sumaTotal3(pedidos,bebidas){
     let Total = pedidos.reduce ((a, b) =>a+b,0);
     let TotalBebidas=bebidas.reduce ((a, b) =>a+b,0);
     
-    for(let i=0;i<pedidos[i];i++){
-
-       /*  console.log("------------------------------------------")
-
-    
-        console.log("orden "+[i+1]+" Plato precio "+pedidos[i]);
-        console.log("orden "+[i+1]+" Bebidas precio "+bebidas[i]); */
-    }
+   
 
     let PrecioTotal=Total+TotalBebidas;
 
     
-   /*  console.log("-----------------"),
-    console.log("total de menu: "+Total);
-    console.log("total de Bebida: "+TotalBebidas);
-    console.log("___________________________")
-    console.log("el total es : "+PrecioTotal); */
+
     let montototal=document.getElementById("montoTotal3");
     montototal.innerText=PrecioTotal;
     sumarPrecios3.splice(0, sumarPrecios3.length);
     sumarPreciosBebida3.splice(0,sumarPreciosBebida3.length);
+    Swal.fire({
+      
+        icon: 'success',
+        title: 'Pedido Finalizado',
+        showConfirmButton: false,
+        timer: 1500
+      })
 
     vaciarPedidos3();
    
@@ -758,6 +745,14 @@ function sumaTotal4(pedidos,bebidas){
     montototal.innerText=PrecioTotal;
     sumarPrecios4.splice(0, sumarPrecios4.length);
     sumarPreciosBebida4.splice(0,sumarPreciosBebida4.length);
+
+    Swal.fire({
+        
+        icon: 'success',
+        title: 'Pedido Finalizado',
+        showConfirmButton: false,
+        timer: 1500
+      })
 
     vaciarPedidos4();
    
@@ -989,7 +984,8 @@ function agregarComida() {
     }
    
     menuComidas.push(infoComida)
-    fetch()
+    sincronizar();
+    
 
     dibujarMenuComidas();
 }
